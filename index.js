@@ -164,6 +164,6 @@ function checkNotAuthenticated(req, res, next) {
 mongoose.connect(process.env.MONGOOSE_URI).then(resp => {
     console.log('mongoose connected successfully')
 }).catch(e => console.log(e))
-app.listen(process.env.API_PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log(`server is listening on port ${process.env.API_PORT}`)
 })
