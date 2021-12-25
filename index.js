@@ -38,13 +38,14 @@ const fileUpload = multer({
     storage: filestorage,
     fileFilter: function (req, file, cb) {
         var ext = path.extname(file.originalname)
-
+        console.log(ext)
        
         cb(null, true)
     }
 
 
 })
+
 
 //middlewares
 app.set('view engine', 'ejs')
