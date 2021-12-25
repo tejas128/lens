@@ -1,0 +1,19 @@
+<%- include ('./head') %>
+<h3 class="text-center mt-3">Login </h3>
+    <div class="container">
+
+        <form class="login-form" method="post" action="/admin/login">
+            <label>Username:</label>
+ 
+             <input class="form-control mb-4" id="username" type="text" name="username">
+            <label>password:</label>
+            <input class="form-control mb-4" type="password" name="password" />
+            <button class="btn btn-primary " type="submit">Login</button>
+            <% if (messages.error) { %>
+                <p>
+                    <%= messages.error %>
+                </p>
+                <% } %>
+        </form>
+    </div>
+<%- include('./footer') %>

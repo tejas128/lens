@@ -1,0 +1,7 @@
+post http://localhost:8000/admin 
+Content-Type: application/json
+
+{
+    "username":"sid",
+    "password":"Sid@2000"
+}
