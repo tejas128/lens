@@ -108,7 +108,7 @@ app.get('/admin/login', checkNotAuthenticated, (req, res) => {
 
 app.get("/admin", checkAuthenticated, async(req, res) => {
     try{
-        const posts= await Post.find()
+        const posts= await Post.find().sort({createdAt:-1})
         
         res.render('adminhome',{
             posts
