@@ -37,8 +37,8 @@
 		<section id="thumbnails">
 			<% posts.forEach(p=>{ %>
 				<article>
-					<a class="thumbnail" href="images/<%= p.img %>" data-position="left center"><img
-							src="images/<%= p.img %>" alt="" /></a>
+					<a class="thumbnail" href="<%= p.img %>" data-position="left center"><img
+							src="<%= p.img %>" alt="" /></a>
 					<h2><%= p.title %></h2>
 					<p><%= p.desc %></p>
 				</article>

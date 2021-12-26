@@ -9,7 +9,7 @@
 
             <div class="form-container">
 
-                <form class="form" method="post" action="/admin/post" enctype="multipart/form-data">
+                <form class="form" method="post" action="/admin/post">
                     <h5 class="mb-4">Add post</h5>
                     <div class="mb-3 row">
                         <label for="title" class="col-sm-1 col-form-label">Title:</label>
@@ -25,9 +25,9 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label for="formfile" class="col-sm-1 col-form-label">Image:</label>
+                        <label for="title" class="col-sm-1 col-form-label">Img Id:</label>
                         <div class="col-sm-11">
-                            <input type="file" class="form-control" name="imgFile" id="formFile" required>
+                            <input type="text" name="img" class="form-control" id="title" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Add post</button>
@@ -59,7 +59,7 @@
                                 <td>
                                     <%=p.desc %>
                                 </td>
-                                <td><img style="width: 100px; height: 100px;" src='/images/<%= p.img %>'></td>
+                                <td><img style="width: 100px; height: 100px;" src='<%= p.img %>'></td>
                                 <td>
                                     <form method="POST" action="/admin/post/<%= p._id %>?_method=DELETE">
                                         <button type="submit" class=" btn btn-danger"> Delete</button>

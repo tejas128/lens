@@ -5,7 +5,7 @@ const session = require('express-session')
 const flash = require('express-flash')
 const methodOverride = require('method-override')
 const bodyparser = require('body-parser')
-const multer = require('multer')
+// const multer = require('multer')
 const path=require('path')
 const fs=require('fs')
 const app = express()
@@ -20,31 +20,31 @@ initializePassport(
     id => Admin.findOne({ _id: id })
 )
 //upload
-const filestorage = multer.diskStorage({
-    destination: (req, file, cb) => {
+// const filestorage = multer.diskStorage({
+//     destination: (req, file, cb) => {
         
 
-        cb(null, "public/images")
-    },
-    filename: (req, file, cb) => {
+//         cb(null, "public/images")
+//     },
+//     filename: (req, file, cb) => {
 
-        cb(null, Date.now() + path.extname(file.originalname))
-    },
+//         cb(null, Date.now() + path.extname(file.originalname))
+//     },
 
 
-})
+// })
 
-const fileUpload = multer({
-    storage: filestorage,
-    fileFilter: function (req, file, cb) {
-        var ext = path.extname(file.originalname)
+// const fileUpload = multer({
+//     storage: filestorage,
+//     fileFilter: function (req, file, cb) {
+//         var ext = path.extname(file.originalname)
         
        
-        cb(null, true)
-    }
+//         cb(null, true)
+//     }
 
 
-})
+// })
 
 
 //middlewares
@@ -120,12 +120,13 @@ app.get("/admin", checkAuthenticated, async(req, res) => {
     }
    
 })
-app.post("/admin/post",checkAuthenticated, fileUpload.single('imgFile'),async (req, res) => {
+app.post("/admin/post",checkAuthenticated,async (req, res) => {
+    const link = `https://drive.google.com/uc?export=view&id=${req.body.img}`
     try{
          const newPost = new Post({
              title:req.body.title,
              desc:req.body.desc,
-             img:req.file.filename
+             img:link
          })
          await newPost.save()
          res.redirect('back')
@@ -136,10 +137,8 @@ app.post("/admin/post",checkAuthenticated, fileUpload.single('imgFile'),async (r
 app.delete("/admin/post/:id",checkAuthenticated,async(req,res)=>{
     try{
         const post = await Post.findByIdAndDelete(req.params.id)
-        fs.unlink(`./public/images/${post.img}`,(err)=>{
-            if(err) console.log(err)
-            res.redirect('back')
-        })
+   
+        res.redirect('back')
        
 
     }catch(e){
@@ -165,5 +164,5 @@ mongoose.connect(process.env.MONGOOSE_URI).then(resp => {
     console.log('mongoose connected successfully')
 }).catch(e => console.log(e))
 app.listen(process.env.PORT || 5000, () => {
-    console.log(`server is listening on port ${process.env.API_PORT}`)
+    console.log(`server is listening on port ${process.env.PORT}`)
 })
