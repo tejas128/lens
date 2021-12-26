@@ -121,12 +121,12 @@ app.get("/admin", checkAuthenticated, async(req, res) => {
    
 })
 app.post("/admin/post",checkAuthenticated,async (req, res) => {
-    const link = `https://drive.google.com/uc?export=view&id=${req.body.img}`
+    
     try{
          const newPost = new Post({
              title:req.body.title,
              desc:req.body.desc,
-             img:link
+             img:req.body.img
          })
          await newPost.save()
          res.redirect('back')
